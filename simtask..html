@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Background Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+      position: relative; /* Added to the body to position the button */
+    }
+
+    #background {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    #content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative; /* Added to create a stacking context */
+    }
+
+    #shape {
+      width: 200px;
+      height: 200px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    #generate-button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      top: 50%; /* Position the button 50% from the top */
+      left: 50%; /* Position the button 50% from the left */
+      transform: translate(-50%, -50%); /* Center the button */
+    }
+  </style>
+</head>
+<body>
+  <div id="background"></div>
+  <div id="content">
+    <div id="shape"></div>
+    <button id="generate-button" onclick="generateBackground()">Generate</button>
+  </div>
+
+  <script>
+    // JavaScript code remains unchanged
+    function generateBackground() {
+      const background = document.getElementById("background");
+      const colors = [
+        getRandomColor(),
+        getRandomColor()
+      ];
+
+      const gradientDirection = getRandomGradientDirection();
+
+      background.style.background = `linear-gradient(${gradientDirection}, ${colors[0]}, ${colors[1]})`;
+
+      const shape = document.getElementById("shape");
+      shape.style.backgroundColor = getRandomColor();
+    }
+
+    function getRandomColor() {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function getRandomGradientDirection() {
+      const directions = [
+        "to top",
+        "to bottom",
+        "to left",
+        "to right",
+        "to top left",
+        "to top right",
+        "to bottom left",
+        "to bottom right"
+      ];
+      return directions[Math.floor(Math.random() * directions.length)];
+    }
+
+    generateBackground(); // Generate the initial background on page load
+  </script>
+</body>
+</html>
